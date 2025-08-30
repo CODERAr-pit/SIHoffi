@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import {useState} from "react"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createPageUrl } from "@/utils";
@@ -36,6 +37,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { LanguageProvider, useLanguage } from '@/components/providers/LanguageContext/page.jsx';
+import { useRouter } from "next/navigation";
 
 const navigationItemsConfig = [
   {
@@ -77,31 +79,84 @@ const navigationItemsConfig = [
 ];
 
 const LanguageSwitcher = () => {
+  const [open, setOpen] = useState(false);
   const { language, setLanguage, languages } = useLanguage();
   const currentLang = languages.find(l => l.code === language);
 
   return (
+    // <DropdownMenu>
+    //   <DropdownMenuTrigger asChild>
+    //     <Button variant="outline" className="flex items-center gap-2">
+    //       <Globe className="w-4 h-4" />
+    //       <span>{currentLang?.name}</span>
+    //     </Button>
+    //   </DropdownMenuTrigger>
+    //   <DropdownMenuContent>
+    //     {languages.map(lang => (
+    //       <DropdownMenuItem key={lang.code} onSelect={() => setLanguage(lang.code)}>
+    //         <span className="mr-2">{lang.flag}</span>
+    //         {lang.name}
+    //       </DropdownMenuItem>
+    //     ))}
+    //   </DropdownMenuContent>
+    // </DropdownMenu>
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+      {/* Trigger */}
+      <DropdownMenuTrigger asChild onClick={() => setOpen(!open)}>
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 rounded-xl shadow-sm hover:bg-gray-50"
+        >
           <Globe className="w-4 h-4" />
-          <span>{currentLang?.name}</span>
+          <span className="font-medium text-gray-800">{currentLang?.name}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {languages.map(lang => (
-          <DropdownMenuItem key={lang.code} onSelect={() => setLanguage(lang.code)}>
-            <span className="mr-2">{lang.flag}</span>
-            {lang.name}
+
+      {/* Dropdown content */}
+      <DropdownMenuContent open={open} className="rounded-xl border border-gray-200 bg-white/90 backdrop-blur-md shadow-lg">
+        {languages.map((lang) => (
+          <DropdownMenuItem
+            key={lang.code}
+            onSelect={() => {
+              setLanguage(lang.code);
+              setOpen(false);
+            }}
+          >
+            <span className="mr-2 text-lg">{lang.flag}</span>
+            <span className="text-gray-700 font-medium">{lang.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
+    // <DropdownMenu>
+    //   <DropdownMenuTrigger asChild onClick={() => setOpen(!open)}>
+    //     <Button variant="outline" className="flex items-center gap-2">
+    //       <Globe className="w-4 h-4" />
+    //       <span>{currentLang?.name}</span>
+    //     </Button>
+    //   </DropdownMenuTrigger>
+
+    //   <DropdownMenuContent open={open}>
+    //     {languages.map((lang) => (
+    //       <DropdownMenuItem
+    //         key={lang.code}
+    //         onSelect={() => {
+    //           setCurrentLang(lang);
+    //           setOpen(false);
+    //         }}
+    //       >
+    //         <span className="mr-2">{lang.flag}</span>
+    //         {lang.name}
+    //       </DropdownMenuItem>
+    //     ))}
+    //   </DropdownMenuContent>
+    // </DropdownMenu>
   );
 };
 
 function AppLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter()
   const { t } = useLanguage();
 
   const navigationItems = navigationItemsConfig.map(item => ({
@@ -198,8 +253,9 @@ function AppLayout({ children }) {
         <main className="flex-1 flex flex-col">
           <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
-                <SidebarTrigger className="hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200 md:hidden" />
-                <h1 className="text-xl font-bold text-gray-900 hidden md:block">{activeItem?.title || t('layout.mobile_header')}</h1>
+                {/* <SidebarTrigger className="hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200 md:hidden" />
+                <h1 className="text-xl font-bold text-gray-900 hidden md:block">{activeItem?.title || t('layout.mobile_header')}</h1> */}
+                 <button type="button" onClick={() => router.push("/admin/signin")} className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all">Admin Login</button>
             </div>
             <LanguageSwitcher />
           </header>
