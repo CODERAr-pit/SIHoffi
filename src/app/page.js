@@ -23,10 +23,29 @@ import StatusOverview from "@/components/home/StatusOverview/page";
 import WelcomeCard from "@/components/home/WelcomeCard/page";
 import { useLanguage } from '@/components/providers/LanguageContext/page';
 
+
+
 export default function Home() {
   const [studentData, setStudentData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useLanguage();
+
+  // useEffect( async () => {
+  //   await connect();
+
+  //   // Seed default admin if not exists
+  //   const { ADMIN_PASSWORD, ADMIN_USERNAME } = process.env;
+  //   if (ADMIN_USERNAME && ADMIN_PASSWORD) {
+  //       const exists = await User.findOne({ username: ADMIN_USERNAME });
+  //       if (!exists) {
+  //           const hashed = await bcrypt.hash(ADMIN_PASSWORD, 10);
+  //           await User.create({
+  //             username: ADMIN_USERNAME,
+  //             password: hashed,
+  //           })
+  //       }
+  //   }
+  // }, [])
 
   useEffect(() => {
     loadStudentData();
