@@ -115,8 +115,8 @@ function AppLayout({ children }) {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-50 to-indigo-50">
-        <Sidebar className="border-r border-blue-100 bg-white/80 backdrop-blur-sm">
-          <SidebarHeader className="border-b border-blue-100 p-6">
+        <Sidebar className="border-r border-blue-200 bg-white/80 backdrop-blur-sm">
+          <SidebarHeader className="border-b border-blue-300 p-6">    
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
                 <GraduationCap className="w-7 h-7 text-white" />
@@ -139,9 +139,9 @@ function AppLayout({ children }) {
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton
                         asChild
-                        className={`hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 rounded-xl px-3 py-3 ${
+                        className={`hover:bg-blue-400 text-black hover:text-blue-700 transition-all duration-200 rounded-xl px-3 py-3 ${
                           pathname === item.url
-                            ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-200'
+                            ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-blue-400 shadow-lg shadow-blue-200'
                             : ''
                         }`}
                       >
@@ -151,7 +151,7 @@ function AppLayout({ children }) {
                             <span className="font-medium text-sm">{item.title}</span>
                             <p className={`text-xs mt-0.5 ${
                               pathname === item.url
-                                ? 'text-blue-100'
+                                ? 'text-blue-300'
                                 : 'text-gray-500'
                             }`}>
                               {item.description}
