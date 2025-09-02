@@ -82,11 +82,11 @@ export default function Education() {
           </CardHeader>
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-4 bg-blue-50">
-                <TabsTrigger value="comparison" className="text-sm">तुलना</TabsTrigger>
-                <TabsTrigger value="guide" className="text-sm">गाइड</TabsTrigger>
-                <TabsTrigger value="mistakes" className="text-sm">गलतियां</TabsTrigger>
-                <TabsTrigger value="videos" className="text-sm">वीडियो</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-4 bg-white/80 border border-blue-200 rounded-lg">
+                <TabsTrigger value="comparison" className="text-sm text-gray-900 data-[state=active]:bg-blue-600 data-[state=active]:text-white">तुलना</TabsTrigger>
+                <TabsTrigger value="guide" className="text-sm text-gray-900 data-[state=active]:bg-blue-600 data-[state=active]:text-white">गाइड</TabsTrigger>
+                <TabsTrigger value="mistakes" className="text-sm text-gray-900 data-[state=active]:bg-blue-600 data-[state=active]:text-white">गलतियां</TabsTrigger>
+                <TabsTrigger value="videos" className="text-sm text-gray-900 data-[state=active]:bg-blue-600 data-[state=active]:text-white">वीडियो</TabsTrigger>
               </TabsList>
               
               <TabsContent value="comparison" className="mt-6">

@@ -13,7 +13,10 @@ import {
   Users,
   GraduationCap,
   Phone,
-  Globe
+  Globe,
+  Mail,
+  MapPin,
+  Send
 } from "lucide-react";
 import {
   Sidebar,
@@ -170,7 +173,7 @@ function AppLayout({ children }) {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-50 to-indigo-50">
-        <Sidebar className="border-r border-blue-200 bg-white/80 backdrop-blur-sm">
+        <Sidebar className="hidden md:block border-r border-blue-200 bg-white/80 backdrop-blur-sm">
           <SidebarHeader className="border-b border-blue-300 p-6">    
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -253,9 +256,9 @@ function AppLayout({ children }) {
         <main className="flex-1 flex flex-col">
           <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
-                {/* <SidebarTrigger className="hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200 md:hidden" />
-                <h1 className="text-xl font-bold text-gray-900 hidden md:block">{activeItem?.title || t('layout.mobile_header')}</h1> */}
-                 <button type="button" onClick={() => router.push("/admin/signin")} className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all">Admin Login</button>
+                <SidebarTrigger className="md:hidden hover:bg-blue-50 p-2 rounded-lg transition-colors duration-200" aria-label="Open menu" />
+                <h1 className="text-xl font-bold text-gray-900 hidden md:block">{activeItem?.title || t('layout.mobile_header')}</h1>
+                 <button type="button" onClick={() => router.push("/admin/signin")} className="ml-2 px-6 py-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all">Admin Login</button>
             </div>
             <LanguageSwitcher />
           </header>
@@ -263,6 +266,64 @@ function AppLayout({ children }) {
           <div className="flex-1 overflow-auto">
             {children}
           </div>
+
+          {/* Global Footer */}
+          <footer className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-t border-blue-100">
+            <div className="max-w-7xl mx-auto px-6 py-10">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                {/* Brand / About */}
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                      <GraduationCap className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">Scholarship Portal</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    A unified platform for transparent, fast and direct scholarship disbursal via DBT.
+                  </p>
+                </div>
+
+                {/* Contact */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Contact</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-blue-600" /> support@scholar-portal.gov</li>
+                    <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-blue-600" /> 1800-XXX-XXXX</li>
+                    <li className="flex items-center gap-2"><Globe className="w-4 h-4 text-blue-600" /> www.scholar-portal.gov</li>
+                  </ul>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Address</h4>
+                  <p className="text-sm text-gray-700 flex items-start gap-2">
+                    <MapPin className="w-4 h-4 text-blue-600 mt-0.5" />
+                    <span>Department of Education, New Secretariat Complex, Capital City - 000000</span>
+                  </p>
+                </div>
+
+                {/* Query form */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Have a query?</h4>
+                  <form className="space-y-2" onSubmit={(e)=> e.preventDefault()}>
+                    <input type="text" placeholder="Your name" className="w-full px-3 py-2 text-sm border border-blue-200 rounded-lg bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                    <input type="email" placeholder="Your email" className="w-full px-3 py-2 text-sm border border-blue-200 rounded-lg bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+                    <textarea rows="3" placeholder="Type your question" className="w-full px-3 py-2 text-sm border border-blue-200 rounded-lg bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+                    <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700">
+                      <Send className="w-4 h-4" /> Submit
+                    </button>
+                    <p className="text-xs text-gray-500">We typically respond within 24-48 hours.</p>
+                  </form>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-blue-100 text-xs text-gray-500 flex flex-col md:flex-row items-center justify-between gap-2">
+                <span>© {new Date().getFullYear()} Scholarship Portal. All rights reserved.</span>
+                <span>Built with transparency and student-first design.</span>
+              </div>
+            </div>
+          </footer>
         </main>
       </div>
     </SidebarProvider>
